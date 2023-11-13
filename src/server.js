@@ -35,6 +35,11 @@ app.patch("/stores/:id", async (req, res) => {
   const id = req.params.id;
   const value = req.body;
   await knex("store").where({ id: id }).update(value);
-  console.log(value);
+  res.sendStatus("200");
+});
+
+app.delete("/stores/:id", async (req, res) => {
+  const id = req.params.id;
+  await knex("store").where({ id: id }).del();
   res.sendStatus("200");
 });

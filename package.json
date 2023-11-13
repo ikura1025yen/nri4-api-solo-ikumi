@@ -1,0 +1,23 @@
+{
+  "name": "nri4-api-solo-ikumi",
+  "version": "1.0.0",
+  "description": "My first project!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ikura1025yen/nri4-api-solo-ikumi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ikura1025yen/nri4-api-solo-ikumi/issues"
+  },
+  "homepage": "https://github.com/ikura1025yen/nri4-api-solo-ikumi#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

@@ -8,7 +8,7 @@ exports.up = function (knex) {
     table.string("store_name", 32);
     table.string("region", 32);
     table.string("photo_path", 100);
-    table.date("date");
+    table.date("date").defaultTo(knex.fn.now());
     table.string("comment", 100);
   });
 };

@@ -15,28 +15,39 @@ const setupServer = () => {
   });
 
   app.get("/stores", async (req, res) => {
-    const store = await knex.select().from("store");
+    let store = await knex.select().from("store");
+    store = store.map((item) => {
+      return {
+        ...item,
+        date: item.date.toLocaleDateString("ja-JP", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          timeZone: "Asia/Tokyo",
+        }),
+      };
+    });
+
     return res.json(store);
   });
 
   app.post("/stores", async (req, res) => {
-    const id = parseInt(req.body.id);
     const storeName = req.body.store_name;
     const region = req.body.region;
     const comment = req.body.comment;
     const photoPath = req.body.photoPath;
     // const date = req.body.date;
-    const store = await knex
+    const storeId = await knex
       .insert({
-        id: id,
         store_name: storeName,
         region: region,
         photo_path: photoPath,
         // date: date,
         comment: comment,
       })
+      .returning("id")
       .into("store");
-    return res.json(store);
+    return res.json(storeId[0]);
   });
 
   app.patch("/stores/:id", async (req, res) => {

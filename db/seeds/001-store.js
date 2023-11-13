@@ -7,7 +7,6 @@ exports.seed = async function (knex) {
   await knex("store").del();
   await knex("store").insert([
     {
-      id: 1,
       store_name: "大統領",
       region: "上野",
       photo_path: "",
@@ -15,7 +14,6 @@ exports.seed = async function (knex) {
       comment: "",
     },
     {
-      id: 2,
       store_name: "正ちゃん",
       region: "浅草",
       photo_path: "",
@@ -23,7 +21,6 @@ exports.seed = async function (knex) {
       comment: "",
     },
     {
-      id: 3,
       store_name: "はなくじら",
       region: "福島(大阪)",
       photo_path: "",

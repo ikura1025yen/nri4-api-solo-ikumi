@@ -10,6 +10,7 @@ const knex = require("../src/knex");
 const server = setupServer();
 describe("Izakaya API Server", () => {
   let request;
+  let testId = 1000;
   beforeEach(() => {
     request = chai.request(server);
   });
@@ -24,7 +25,12 @@ describe("Izakaya API Server", () => {
       expected = expected.map((item) => {
         return {
           ...item,
-          date: item.date.toISOString(),
+          date: item.date.toLocaleDateString("ja-JP", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            timeZone: "Asia/Tokyo",
+          }),
         };
       });
       const res = await request.get("/stores");
@@ -35,41 +41,41 @@ describe("Izakaya API Server", () => {
   describe("POST /stores", () => {
     it("should register stores", async () => {
       const testData = {
-        id: 100,
         store_name: "鳥せん",
         region: "学芸大学",
         photo_path: "",
         date: "2000-01-01",
         comment: "",
       };
-      await request.post("/stores").send(testData);
-
-      const newData = await knex.select().from("store").where("id", 100);
-      expect(newData).to.exist;
+      const res = await request.post("/stores").send(testData);
+      const testId = res.body.id;
+      const newData = await knex.select().from("store").where("id", testId);
+      expect(newData[0].store_name).to.equal(testData.store_name);
     });
   });
 
   describe("PATCH /stores/:id", () => {
     it("should update stores", async () => {
       const updateData = { store_name: "更新" };
-      await request.patch("/stores/100").send(updateData);
+      console.log(testId);
+      await request.patch(`/stores/${testId}`).send(updateData);
 
       const newData = await knex
         .select("store_name")
         .from("store")
-        .where("id", 100);
+        .where("id", testId);
       expect(newData[0]).to.deep.equal(updateData);
     });
   });
 
   describe("DELETE /stores/:id", () => {
     it("should update stores", async () => {
-      await request.delete("/stores/100");
+      await request.delete(`/stores/${testId}`);
 
       const newData = await knex
         .select("store_name")
         .from("store")
-        .where("id", 100);
+        .where("id", testId);
       expect(newData[0]).to.deep.equal(undefined);
     });
   });

@@ -21,11 +21,20 @@ app.post("/stores", async (req, res) => {
   const id = req.body.id;
   const storeName = req.body.store_name;
   const region = req.body.region;
+  const comment = req.body.comment;
   // ToDo
   // const photoPath = req.body.photoPath;
   // const date = req.body.date;
   const store = await knex
-    .insert({ id: id, store_name: storeName, region: region })
+    .insert({ id: id, store_name: storeName, region: region, comment: comment })
     .into("store");
   return res.json(store);
+});
+
+app.patch("/stores/:id", async (req, res) => {
+  const id = req.params.id;
+  const value = req.body;
+  await knex("store").where({ id: id }).update(value);
+  console.log(value);
+  res.sendStatus("200");
 });

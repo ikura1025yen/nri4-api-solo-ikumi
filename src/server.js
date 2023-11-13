@@ -23,14 +23,15 @@ const setupServer = () => {
     const storeName = req.body.store_name;
     const region = req.body.region;
     const comment = req.body.comment;
-    // ToDo
-    // const photoPath = req.body.photoPath;
-    // const date = req.body.date;
+    const photoPath = req.body.photoPath;
+    const date = req.body.date;
     const store = await knex
       .insert({
         id: id,
         store_name: storeName,
         region: region,
+        photo_path: photoPath,
+        date: date,
         comment: comment,
       })
       .into("store");

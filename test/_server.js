@@ -1,4 +1,5 @@
 const chai = require("chai");
+const { expect } = require("chai");
 const chaiHttp = require("chai-http");
 chai.use(chaiHttp);
 chai.should();
@@ -12,6 +13,11 @@ describe("Izakaya API Server", () => {
   beforeEach(() => {
     request = chai.request(server);
   });
+
+  after(async () => {
+    await knex.from("store").where("id", 100).del();
+  });
+
   describe("GET /stores", () => {
     it("should return stores", async () => {
       let expected = await knex.select().from("store");
@@ -23,6 +29,40 @@ describe("Izakaya API Server", () => {
       });
       const res = await request.get("/stores");
       res.body.should.deep.equal(expected);
+    });
+  });
+
+  describe("POST /stores", () => {
+    it("should register stores", async () => {
+      const testData = {
+        id: 100,
+        store_name: "鳥せん",
+        region: "学芸大学",
+        photo_path: "",
+        date: "2000-01-01",
+        comment: "",
+      };
+      await request.post("/stores").send(testData);
+
+      const newData = await knex.select().from("store").where("id", 100);
+      expect(newData).to.exist;
+    });
+  });
+
+  describe("PATCH /stores/:id", () => {
+    it("should update stores", async () => {
+      const testData = {
+        id: 100,
+        store_name: "鳥せん",
+        region: "学芸大学",
+        photo_path: "",
+        date: "2000-01-01",
+        comment: "",
+      };
+      await request.post("/stores").send(testData);
+
+      const newData = await knex.select().from("store").where("id", 100);
+      expect(newData).to.exist;
     });
   });
 });

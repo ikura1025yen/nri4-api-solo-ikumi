@@ -12,6 +12,7 @@ exports.seed = async function (knex) {
       region: "上野",
       photo_path: "",
       date: "2000-01-01",
+      comment: "",
     },
     {
       id: 2,
@@ -19,6 +20,7 @@ exports.seed = async function (knex) {
       region: "浅草",
       photo_path: "",
       date: "2023-11-13",
+      comment: "",
     },
     {
       id: 3,
@@ -26,6 +28,7 @@ exports.seed = async function (knex) {
       region: "福島(大阪)",
       photo_path: "",
       date: "2022-12-29",
+      comment: "",
     },
   ]);
 };

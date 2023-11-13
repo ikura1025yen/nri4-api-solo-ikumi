@@ -51,18 +51,26 @@ describe("Izakaya API Server", () => {
 
   describe("PATCH /stores/:id", () => {
     it("should update stores", async () => {
-      const testData = {
-        id: 100,
-        store_name: "鳥せん",
-        region: "学芸大学",
-        photo_path: "",
-        date: "2000-01-01",
-        comment: "",
-      };
-      await request.post("/stores").send(testData);
+      const updateData = { store_name: "更新" };
+      await request.patch("/stores/100").send(updateData);
 
-      const newData = await knex.select().from("store").where("id", 100);
-      expect(newData).to.exist;
+      const newData = await knex
+        .select("store_name")
+        .from("store")
+        .where("id", 100);
+      expect(newData[0]).to.deep.equal(updateData);
+    });
+  });
+
+  describe("DELETE /stores/:id", () => {
+    it("should update stores", async () => {
+      await request.delete("/stores/100");
+
+      const newData = await knex
+        .select("store_name")
+        .from("store")
+        .where("id", 100);
+      expect(newData[0]).to.deep.equal(undefined);
     });
   });
 });

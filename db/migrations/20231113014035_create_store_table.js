@@ -9,6 +9,7 @@ exports.up = function (knex) {
     table.string("region", 32);
     table.string("photo_path", 100);
     table.date("date");
+    table.string("comment", 100);
   });
 };
 

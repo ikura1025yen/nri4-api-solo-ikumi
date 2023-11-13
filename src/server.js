@@ -1,4 +1,5 @@
 const express = require("express");
+// const path = require("path");
 const knex = require("./knex");
 
 const setupServer = () => {
@@ -10,7 +11,7 @@ const setupServer = () => {
   // });
 
   app.get("/", (req, res) => {
-    console.log("OK");
+    res.sendFile(__dirname + "/index.html");
   });
 
   app.get("/stores", async (req, res) => {
@@ -19,19 +20,19 @@ const setupServer = () => {
   });
 
   app.post("/stores", async (req, res) => {
-    const id = req.body.id;
+    const id = parseInt(req.body.id);
     const storeName = req.body.store_name;
     const region = req.body.region;
     const comment = req.body.comment;
     const photoPath = req.body.photoPath;
-    const date = req.body.date;
+    // const date = req.body.date;
     const store = await knex
       .insert({
         id: id,
         store_name: storeName,
         region: region,
         photo_path: photoPath,
-        date: date,
+        // date: date,
         comment: comment,
       })
       .into("store");

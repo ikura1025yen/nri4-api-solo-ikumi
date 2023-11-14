@@ -15,8 +15,22 @@ describe("Izakaya API Server", () => {
     request = chai.request(server);
   });
 
+  before(async () => {
+    const insertedData = await knex
+      .insert({
+        store_name: "testStore",
+        region: "testRegion",
+        photo_path: "testPhotoPath",
+        // date: date,
+        comment: "TestComment",
+      })
+      .returning("id")
+      .into("store");
+    testId = insertedData[0].id;
+  });
+
   after(async () => {
-    await knex.from("store").where("id", 100).del();
+    await knex.from("store").where("store_name", "鳥せん").del();
   });
 
   describe("GET /stores", () => {
@@ -57,21 +71,21 @@ describe("Izakaya API Server", () => {
   describe("PATCH /stores/:id", () => {
     it("should update stores", async () => {
       const updateData = { store_name: "更新" };
-      console.log(testId);
-      await request.patch(`/stores/${testId}`).send(updateData);
-
+      const res = await request.patch(`/stores/${testId}`).send(updateData);
       const newData = await knex
         .select("store_name")
         .from("store")
         .where("id", testId);
+      console.log(newData);
       expect(newData[0]).to.deep.equal(updateData);
     });
   });
 
   describe("DELETE /stores/:id", () => {
     it("should update stores", async () => {
+      console.log(testId);
       await request.delete(`/stores/${testId}`);
-
+      console.log(testId);
       const newData = await knex
         .select("store_name")
         .from("store")

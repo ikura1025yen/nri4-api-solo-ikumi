@@ -1,17 +1,17 @@
 const express = require("express");
-// const path = require("path");
 const knex = require("./knex");
 
 const setupServer = () => {
   const app = express();
   app.use(express.json());
+  app.use(express.static("src/pages"));
 
   // app.listen(3000, () => {
   //   console.log(`Server listening on port 3000`);
   // });
 
   app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/index.html");
+    res.sendFile(__dirname + "/pages/index.html");
   });
 
   app.get("/stores", async (req, res) => {
@@ -36,13 +36,13 @@ const setupServer = () => {
     const region = req.body.region;
     const comment = req.body.comment;
     const photoPath = req.body.photoPath;
-    // const date = req.body.date;
+    const date = req.body.date;
     const storeId = await knex
       .insert({
         store_name: storeName,
         region: region,
         photo_path: photoPath,
-        // date: date,
+        date: date,
         comment: comment,
       })
       .returning("id")

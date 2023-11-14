@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="display.js"></script>
+    <title>居酒屋キロク</title>
+  </head>
+  <body>
+    <div>
+      <table id="store-table">
+        <thead>
+          <th>ID</th>
+          <th>店名</th>
+          <th>場所</th>
+          <th>画像</th>
+          <th>日付</th>
+          <th>コメント</th>
+        </thead>
+      </table>
+    </div>
+    <br>
+    <table id="register-store-table">
+      <thead>
+        <th>ID</th>
+        <th>店名</th>
+        <th>場所</th>
+        <th>画像</th>
+        <th>日付</th>
+        <th>コメント</th>
+      </thead>
+      <tbody>
+        <td><input type="text" id="id"></td>
+        <td><input type="text" id="store_name"></td>
+        <td><input type="text" id="place"></td>
+        <td><input type="text" id="photo_path"></td>
+        <td><input type="text" id="date"></td>
+        <td><input type="text" id="comment"></td>
+      </tbody>
+    </table>
+  </div>
+    <div id="buttons">
+      <button onclick="registerStore()">追加</button>
+      <button onclick="editStore()">編集</button>
+      <button onclick="deleteStore()">削除</button>
+    </div>
+
+    <script>
+      // fetch("http://localhost:3000/stores")
+      //   .then((res) => {
+      //     return res.json();
+      //   })
+      //   .then((res) => {
+      //     res.forEach((store) => {
+      //       const tbody = document.createElement("tbody");
+
+      //       const tdId = document.createElement("td");
+      //       tdId.innerText = store.id;
+      //       tbody.appendChild(tdId);
+
+      //       const tdName = document.createElement("td");
+      //       tdName.innerText = store.store_name;
+      //       tbody.appendChild(tdName);
+
+      //       const tdRegion = document.createElement("td");
+      //       tdRegion.innerText = store.region;
+      //       tbody.appendChild(tdRegion);
+
+      //       const tdPhoto = document.createElement("td");
+      //       tdPhoto.innerText = store.photo_path;
+      //       tbody.appendChild(tdPhoto);
+
+      //       const tdDate = document.createElement("td");
+      //       tdDate.innerText = store.date;
+      //       tbody.appendChild(tdDate);
+
+      //       const tdComment = document.createElement("td");
+      //       tdComment.innerText = store.comment;
+      //       tbody.appendChild(tdComment);
+
+      //       const table = document.getElementById("store-table");
+      //       table.appendChild(tbody);
+      //     });
+      //   });
+
+      // function registerStore(){
+      //   const inputId = document.getElementById("id");
+      //   const inputName = document.getElementById("store_name");
+      //   const inputPlace = document.getElementById("place");
+      //   const inputPhoto = document.getElementById("photo_path");
+      //   const inputDate = document.getElementById("date");
+      //   const inputComment = document.getElementById("comment");
+
+      //   fetch("http://localhost:3000/stores",{
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({ 
+      //       id:inputId.value,
+      //       store_name: inputName.value, 
+      //       region:inputPlace.value,
+      //       photo_path:inputPhoto.value,
+      //       date:inputDate.value,
+      //       comment:inputComment.value}),
+      //   })
+      //     .then((res) => {
+      //       return res.json();
+      //     })
+      // }
+      // function editStore(){
+      //   const inputId = document.getElementById("id");
+      //   const editId = parseInt(inputId.value);
+      //   const inputName = document.getElementById("store_name");
+      //   const inputPlace = document.getElementById("place");
+      //   const inputPhoto = document.getElementById("photo_path");
+      //   const inputDate = document.getElementById("date");
+      //   const inputComment = document.getElementById("comment");
+      //   console.log(editId)
+      //   fetch(`http://localhost:3000/stores/${editId}`,{
+      //     method: "PATCH",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({ 
+      //       store_name: inputName.value, 
+      //       region:inputPlace.value,
+      //       photo_path:inputPhoto.value,
+      //       date:inputDate.value,
+      //       comment:inputComment.value}),
+      //   })
+      //     .then((res) => {
+      //       return res.json();
+      //     })
+      // }
+
+      // function deleteStore(){
+      //   const inputId = document.getElementById("id");
+      //   const deleteId = parseInt(inputId.value);
+      //   fetch(`http://localhost:3000/stores/${deleteId}`,{
+      //     method: "DELETE",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     }
+      //   })
+      //     .then((res) => {
+      //       return res.json();
+      //     })
+      // }
+      
+    </script>
+
+  </body>
+</html>

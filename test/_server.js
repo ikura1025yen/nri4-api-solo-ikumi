@@ -76,16 +76,13 @@ describe("Izakaya API Server", () => {
         .select("store_name")
         .from("store")
         .where("id", testId);
-      console.log(newData);
       expect(newData[0]).to.deep.equal(updateData);
     });
   });
 
   describe("DELETE /stores/:id", () => {
     it("should update stores", async () => {
-      console.log(testId);
       await request.delete(`/stores/${testId}`);
-      console.log(testId);
       const newData = await knex
         .select("store_name")
         .from("store")

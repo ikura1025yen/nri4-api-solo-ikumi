@@ -36,7 +36,7 @@ const setupServer = () => {
     const region = req.body.region;
     const comment = req.body.comment;
     const photoPath = req.body.photoPath;
-    const date = req.body.date;
+    const date = req.body.date ? req.body.date : new Date();
     const storeId = await knex
       .insert({
         store_name: storeName,
@@ -52,8 +52,20 @@ const setupServer = () => {
 
   app.patch("/stores/:id", async (req, res) => {
     const id = req.params.id;
-    const value = req.body;
-    await knex("store").where({ id: id }).update(value);
+    const values = req.body;
+
+    const currentData = await knex("store").where({ id: id }).first();
+    const margedData = { ...currentData };
+
+    Object.keys(values).forEach((key) => {
+      if (values[key] !== "") {
+        margedData[key] = values[key];
+      }
+    });
+
+    margedData.date = new Date();
+
+    await knex("store").where({ id: id }).update(margedData);
     res.sendStatus("200");
   });
 

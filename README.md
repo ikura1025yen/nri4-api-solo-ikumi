@@ -47,25 +47,25 @@ http://localhost:3000/stores
 		"id": 1,
 		"store_name": "大統領",
 		"region": "上野",
-		"photo_path": "",
+		"photo_path": "img/png_1.jpeg",
 		"date": "1999-12-31T15:00:00.000Z",
-		"comment": ""
+		"comment": "2022/11/11"
 	},
 	{
 		"id": 2,
 		"store_name": "正ちゃん",
 		"region": "浅草",
-		"photo_path": "",
+		"photo_path": "img/png_2.jpeg",
 		"date": "2023-11-12T15:00:00.000Z",
-		"comment": ""
+		"comment": "2022/11/13"
 	},
 	{
 		"id": 3,
 		"store_name": "はなくじら",
 		"region": "福島(大阪)",
-		"photo_path": "",
+		"photo_path": "img/png_3.jpeg",
 		"date": "2022-12-28T15:00:00.000Z",
-		"comment": ""
+		"comment": "2022/11/11"
 	}
 ]
 ```
@@ -100,7 +100,11 @@ http://localhost:3000/stores
 #### レスポンス
 
 ```
-[]
+[
+	{
+		"id": 8
+	}
+]
 ```
 
 ## 居酒屋情報の更新

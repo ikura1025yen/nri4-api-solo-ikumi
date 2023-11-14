@@ -24,7 +24,7 @@ exports.seed = async function (knex) {
       store_name: "はなくじら",
       region: "福島(大阪)",
       photo_path: "img/png_3.jpeg",
-      date: "2022-12-29",
+      date: "2022-11-11",
       comment: "いつも大行列、おでんが美味しい",
     },
     {

@@ -56,7 +56,7 @@ const setupServer = () => {
 
     const currentData = await knex("store").where({ id: id }).first();
     const margedData = { ...currentData };
-
+    console.log(margedData);
     Object.keys(values).forEach((key) => {
       if (values[key] !== "") {
         margedData[key] = values[key];

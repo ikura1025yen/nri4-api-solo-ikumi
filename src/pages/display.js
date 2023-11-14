@@ -20,7 +20,10 @@ window.addEventListener("load", () => {
         tbody.appendChild(tdRegion);
 
         const tdPhoto = document.createElement("td");
-        tdPhoto.innerText = store.photo_path;
+        const photo = document.createElement("img");
+        photo.height = 50;
+        photo.src = store.photo_path;
+        tdPhoto.appendChild(photo);
         tbody.appendChild(tdPhoto);
 
         const tdDate = document.createElement("td");
